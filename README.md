@@ -50,5 +50,5 @@ When you call `render_page(page_num, is_start=False, is_end=False)` for a page, 
 
 ## Run in `docker`
 - **Build:** `docker build -t scavenger-hunt .`
-- **Run:** `docker run -v /path/on/host:/app/ressources -p 8501:8501 scavenger-hunt`
+- **Run:** `docker run --detach -v /path/on/host:/app/ressources -p 8501:8501 scavenger-hunt`
 - **Access:** `http://localhost:8501`
