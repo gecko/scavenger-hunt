@@ -1,5 +1,7 @@
 import streamlit as st
 import yaml
+from code_editor import code_editor
+from glob import glob
 
 
 def read_in_config(page_num: int) -> dict:
@@ -109,38 +111,96 @@ def show_help_menu(config: dict):
     st.markdown(config["help_menu"], unsafe_allow_html=True)
 
 
-def render_page(page_num, is_start=False, is_end=False):
+def get_named_page_renderer(name, page_num, is_start, is_end):
     """
-    The main function.
-
-    It
-    - checks for a password (and doesn't if it was correctly given)
-    - displays the content
-    - checks the proposed solution (and doesn't if the correct solution was already given)
-    - displays the solution and the password for the next page if the quizz was solved
+    Configures the main page rendering function and renames it.
+    For st.Pages() to work with functions, each page needs an individual function.
+    Using this hacky factory-like construct lets us define all pages purely in the config.yaml
+    and generate an individual function per page dynamically.
     """
 
-    config = read_in_config(page_num)
+    def render_page():
+        """
+        The main function.
 
-    setup_page(config)
+        It
+        - checks for a password (and doesn't if it was correctly given)
+        - displays the content
+        - checks the proposed solution (and doesn't if the correct solution was already given)
+        - displays the solution and the password for the next page if the quizz was solved
+        """
 
-    has_access, is_solved = setup_session_states(page_num, is_start)
+        config = read_in_config(page_num)
 
-    if not has_access:
-        has_access = check_access_right(config, page_num)
+        setup_page(config)
 
-    if has_access:
-        show_content(config)
+        has_access, is_solved = setup_session_states(page_num, is_start)
 
-    if is_end:  # The last page doesn't have a quizz and a solution
+        if not has_access:
+            has_access = check_access_right(config, page_num)
+
         if has_access:
-            st.balloons()
-            st.snow()
-    else:
-        if (has_access) and (not is_solved):
-            is_solved = check_for_solution(config, page_num)
-        if (has_access) and (is_solved):
-            show_solved_part(config, page_num)
+            show_content(config)
 
-    if st.sidebar.button("Help"):
-        show_help_menu(config)
+        if is_end:  # The last page doesn't have a quizz and a solution
+            if has_access:
+                st.balloons()
+                st.snow()
+        else:
+            if (has_access) and (not is_solved):
+                is_solved = check_for_solution(config, page_num)
+            if (has_access) and (is_solved):
+                show_solved_part(config, page_num)
+
+        if st.sidebar.button("Help"):
+            show_help_menu(config)
+
+    render_page.__name__ = name
+    render_page.__qualname__ = name
+    return render_page
+
+
+def render_admin_page():
+    st.title("Admin Area")
+    st.markdown("**This is not part of the game**")
+    st.markdown("# ")
+
+    password = st.text_input("Password", type="password")
+    if password == "ei123":
+
+        config_selection = st.selectbox(
+            "Select Config:", options=glob("ressources/*.yaml")
+        )
+
+        with open(config_selection, "r", encoding="utf8") as f:
+            config = f.read()
+        response_dict = code_editor(
+            config,
+            lang="yaml",
+            height="700px",
+            buttons=[
+                {
+                    "name": "Accept edited text",
+                    "feather": "Save",
+                    "hasText": True,
+                    "alwaysOn": True,
+                    "commands": ["save-state", ["response", "saved"]],
+                    "response": "saved",
+                    "style": {"bottom": "0.46rem", "right": "0.4rem"},
+                }
+            ],
+        )
+
+        st.write("Save as:")
+        col1, col2 = st.columns([10, 1])
+        file_name = col1.text_input(
+            "Save as", value=config_selection, label_visibility="collapsed"
+        )
+        if col2.button("OK"):
+            if response_dict["text"] != "":
+                with open(file_name, "w", encoding="utf8") as f:
+                    f.write(response_dict["text"])
+            else:
+                st.warning(
+                    "You need to **accept the text** from the editor first, before saving it."
+                )

@@ -21,4 +21,4 @@ USER myuser
 EXPOSE 8501
 
 # Run the Streamlit app with the specified command
-CMD ["streamlit", "run", "Welcome.py", "--theme.base=dark", "--theme.primaryColor=#ea0a8e"]
+CMD ["streamlit", "run", "app.py", "--theme.base=dark", "--theme.primaryColor=#ea0a8e"]

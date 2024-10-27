@@ -4,10 +4,12 @@ A lightweight Python / Streamlit application that let's you easily set up a digi
 
 ## Description
 The app is build as `streamlit` multipage app.
-The entry point is `Welcome.py`. 
-All other pages are placed in the `pages` folder.
+The entry point is `app.py`. 
+All other pages are defined in the `ressources.yaml`-file.
 
-The main code is in `generic_page.py`. Here the function `render_page()` does the work.
+The main code is in `utils.py`. Here the function `render_page()` does the work.
+It is returned by the function `get_named_page_renderer()`, which configures and renames `render_page()`.
+This way, streamlits `st.Pages()` function gets one individual function per page.
 Every page (except for the very first one) needs a password. 
 The password for each next page is given to the user, if a quizz is solved correctly.
 
@@ -17,6 +19,8 @@ Each page can be configured in the file `ressources/config.yaml`.
 The following options are given:
 ```yaml
 page0:
+  is_start: True, or False  # True for the first page, else False
+  is_end: True, or False  # True for the last page, else False
   title: "A title"  # rendered as st.title()
   text: "Some markdown"   # rendered as st.markdown(unsafe_allow_html=True)
   image: "More markdown (I like to insert an image here)"  # rendered as st.markdown(unsafe_allow_html=True)
@@ -27,9 +31,10 @@ page0:
 
 ### <span style='color:#ea0a8e'>IMPORTANT</span> - Naming convention in the `yaml`
 **Keep in mind** that the pages are **not implemented as linked list**!
-When you call `render_page(page_num, is_start=False, is_end=False)` for a page, you give it the current page number.
+When you call `get_named_page_renderer(name, page_num, is_start=False, is_end=False)` for a page, you give it the current page number.
 - The script searches for a section called *page\<NUMBER\>:*
 - The password for the current page is given in `next_page_password` of the block *page\<NUMBER - 1\>:*
+**Just name the pages:** *page0*, *page1*, *page2*, ... in sequential order.
 
 
 ## Install
@@ -39,7 +44,7 @@ When you call `render_page(page_num, is_start=False, is_end=False)` for a page, 
 
 
 ## Run locally
-`streamlit run Welcome.py --theme.base="dark" --theme.primaryColor="#ea0a8e"`
+`streamlit run app.py --theme.base="dark" --theme.primaryColor="#ea0a8e"`
 
 
 ## Run in `docker`
