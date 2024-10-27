@@ -2,16 +2,28 @@
 
 A lightweight Python / Streamlit application that let's you easily set up a digital scavenger hunt.
 
+
+
 ## Description
 The app is build as `streamlit` multipage app.
 The entry point is `app.py`. 
-All other pages are defined in the `ressources.yaml`-file.
+All other pages are defined in the `ressources/config.yaml`-file.
 
 The main code is in `utils.py`. Here the function `render_page()` does the work.
-It is returned by the function `get_named_page_renderer()`, which configures and renames `render_page()`.
-This way, streamlits `st.Pages()` function gets one individual function per page.
-Every page (except for the very first one) needs a password. 
-The password for each next page is given to the user, if a quizz is solved correctly.
+It is returned by the function `get_named_page_renderer()`, which configures and renames the function `render_page()`.
+
+>   For `st.Page()` to work with functions, **each page needs an individual function.**
+>
+>   Using this hacky factory-like construct lets us define all pages purely in the `config.yaml`
+>
+>   and generate an individual function per page dynamically.
+
+
+
+In the `yaml`-file, every page (except for the very first one) needs a password. 
+The password for each next page is given to the user, if a quiz is solved correctly.
+
+
 
 ## Configuration
 Each page can be configured in the file `ressources/config.yaml`.
@@ -29,12 +41,19 @@ page0:
   next_page_password: "Secret"  # the next pages password
 ```
 
+
+
 ### <span style='color:#ea0a8e'>IMPORTANT</span> - Naming convention in the `yaml`
+
 **Keep in mind** that the pages are **not implemented as linked list**!
 When you call `get_named_page_renderer(name, page_num, is_start=False, is_end=False)` for a page, you give it the current page number.
 - The script searches for a section called *page\<NUMBER\>:*
-- The password for the current page is given in `next_page_password` of the block *page\<NUMBER - 1\>:*
+
+- The password for the current page is given in `next_page_password` of the block *page\<NUMBER - 1\>:**
+
 **Just name the pages:** *page0*, *page1*, *page2*, ... in sequential order.
+
+
 
 
 ## Install
@@ -43,8 +62,12 @@ When you call `get_named_page_renderer(name, page_num, is_start=False, is_end=Fa
 - pip install streamlit pyyaml streamlit_code_editor
 
 
+
+
 ## Run locally
 `streamlit run app.py --theme.base="dark" --theme.primaryColor="#ea0a8e"`
+
+
 
 
 ## Run in `docker`
