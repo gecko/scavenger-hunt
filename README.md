@@ -41,7 +41,7 @@ When you call `render_page(page_num, is_start=False, is_end=False)` for a page, 
 ## Install
 - create an environment
 - activate it
-- pip install streamlit pyyaml
+- pip install streamlit pyyaml streamlit_code_editor
 
 
 ## Run locally

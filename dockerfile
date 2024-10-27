@@ -8,7 +8,7 @@ WORKDIR /app/src
 COPY . /app
 
 # Install necessary Python packages (streamlit)
-RUN pip install --no-cache-dir streamlit pyyaml
+RUN pip install --no-cache-dir streamlit pyyaml streamlit_code_editor
 
 # Create a non-root user and switch to it
 RUN useradd -m myuser
