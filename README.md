@@ -32,12 +32,6 @@ When you call `render_page(page_num, is_start=False, is_end=False)` for a page, 
 - The password for the current page is given in `next_page_password` of the block *page\<NUMBER - 1\>:*
 
 
-## ToDo
-- Admin area to edit the `yaml` template.
-- Do not store the password, but a hash of it.
-- Add "hash my password" functionality to the admin area.
-
-
 ## Install
 - create an environment
 - activate it
@@ -49,6 +43,9 @@ When you call `render_page(page_num, is_start=False, is_end=False)` for a page, 
 
 
 ## Run in `docker`
+There is a little hack here.
+
+In order to make the config files persistent, the `src/ressources` folder is deleted from the image and the actual ressources folder is mounted into the container in place.
 - **Build:** `docker build -t scavenger-hunt .`
-- **Run:** `docker run --detach -v /path/on/host:/app/ressources -p 8501:8501 scavenger-hunt`
+- **Run:** `docker run --detach -v ~/scavenger-hunt/src/ressources:/app/src/ressources:rw -p 8501:8501 --user $(id -u):$(id -g) scavenger-hunt`
 - **Access:** `http://localhost:8501`

@@ -7,6 +7,9 @@ WORKDIR /app/src
 # Copy the current directory contents into the container
 COPY . /app
 
+# Delete the ressources folder, as it will be mounted into the container
+RUN rm -rf /app/src/ressources
+
 # Install necessary Python packages (streamlit)
 RUN pip install --no-cache-dir streamlit pyyaml streamlit_code_editor
 
