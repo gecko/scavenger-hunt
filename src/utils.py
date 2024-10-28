@@ -2,7 +2,8 @@ import streamlit as st
 import yaml
 from code_editor import code_editor
 from glob import glob
-
+from PIL import Image
+import os
 
 def read_in_config(page_num: int) -> dict:
     """Load all details for the pages from yaml file and return them as dict"""
@@ -77,7 +78,10 @@ def show_content(config: dict):
     """Render the main part of the page"""
     st.title(config["title"])
     st.markdown(config["text"], unsafe_allow_html=True)
-    st.markdown(config["image"], unsafe_allow_html=True)
+    if os.path.exists(config["image"]):
+        st.image(Image.open(config["image"]), width=500)
+    else:
+        st.markdown(config["image"], unsafe_allow_html=True)
     st.markdown(config["question"], unsafe_allow_html=True)
 
 
