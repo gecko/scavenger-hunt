@@ -1,6 +1,7 @@
 # Scavenger Hunt
 
 A lightweight Python / Streamlit application that let's you easily set up a digital scavenger hunt.
+Questions are asked and the answer is the password for the next side.
 
 
 
@@ -35,10 +36,9 @@ page0:
   is_end: True, or False  # True for the last page, else False
   title: "A title"  # rendered as st.title()
   text: "Some markdown"   # rendered as st.markdown(unsafe_allow_html=True)
-  image: "More markdown (I like to insert an image here)"  # rendered as st.markdown(unsafe_allow_html=True)
+  image: "path/to/image.jpg or ![](https://images.com.1.jpg) or <img src=https://images.com.1.jpg width=500/>"  # rendered as st.image(), or as st.markdown(unsafe_allow_html=True)
   question: "More markdown (I like to put my question here)"  # rendered as st.markdown(unsafe_allow_html=True)
   answer: "Answer"  # a string that is matched excatly, to get the next pages password
-  next_page_password: "Secret"  # the next pages password
 ```
 
 

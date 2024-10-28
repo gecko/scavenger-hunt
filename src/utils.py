@@ -5,6 +5,7 @@ from glob import glob
 from PIL import Image
 import os
 
+
 def read_in_config(page_num: int) -> dict:
     """Load all details for the pages from yaml file and return them as dict"""
     with open("ressources/config.yaml", "r", encoding="utf-8") as file:
@@ -18,14 +19,10 @@ def read_in_config(page_num: int) -> dict:
     conf["text"] = config[f"page{page_num}"]["text"]
     conf["image"] = config[f"page{page_num}"]["image"]
     conf["question"] = config[f"page{page_num}"]["question"]
-    conf["solution"] = config[f"page{page_num}"]["answer"]
     try:
-        conf["current_page_password"] = config[f"page{page_num - 1}"][
-            "next_page_password"
-        ]
+        conf["current_page_password"] = config[f"page{page_num - 1}"]["answer"]
     except:
         conf["current_page_password"] = ""
-    conf["next_page_password"] = config[f"page{page_num}"]["next_page_password"]
     return conf
 
 
@@ -85,30 +82,6 @@ def show_content(config: dict):
     st.markdown(config["question"], unsafe_allow_html=True)
 
 
-def check_for_solution(config: dict, page_num: int) -> bool:
-    """Check if the proposed solutionis correct and return if it is correct"""
-    proposed_solution = st.text_input(" ")
-    if proposed_solution == config["solution"]:
-        st.session_state[f"page{page_num}_solved"] = True
-        return True
-    else:
-        return False
-
-
-def show_solved_part(config: dict, page_num: int):
-    """Shows the solution and the password for the next page"""
-    st.markdown(
-        f"""
-        ---
-
-        <span style='color:#ea0a8e'>{config["solution"]}</span> is correct, the password to the next side is:
-        <br>
-        <span style='color:#ea0a8e'>**{config["next_page_password"]}**</span>
-        """,
-        unsafe_allow_html=True,
-    )
-
-
 @st.dialog("Some helpful explanations")
 def show_help_menu(config: dict):
     """Add the helping explanations from the config.yaml to the sidebar"""
@@ -150,11 +123,6 @@ def get_named_page_renderer(name, page_num, is_start, is_end):
             if has_access:
                 st.balloons()
                 st.snow()
-        else:
-            if (has_access) and (not is_solved):
-                is_solved = check_for_solution(config, page_num)
-            if (has_access) and (is_solved):
-                show_solved_part(config, page_num)
 
         if st.sidebar.button("Help"):
             show_help_menu(config)

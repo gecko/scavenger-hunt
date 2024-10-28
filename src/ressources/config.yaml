@@ -3,9 +3,9 @@
 help_menu: "
   - Every page (except for the very first one) needs a password.
 
-  - If you solve the riddle, you will get the password to the next page.
+  - The answer to a riddle is the password to the next page.
 
-  - This page uses a session. You can switch between pages, but if you reload it, you will get a new session.
+  - This website uses a session. You can switch between pages, but if you reload the site, you will get a new session.
   "
 page_title: "Xmas Hacking"
 page_icon: "🎄"
@@ -24,7 +24,6 @@ page0:
     **Baby don't hurt...**
     "
   answer: "me"
-  next_page_password: "one"
 
 
 
@@ -39,7 +38,6 @@ page1:
 
     ## How many roads must a man walk..."
   answer: "down"
-  next_page_password: "two"
 
 
 
@@ -51,7 +49,6 @@ page2:
   image: "<img src=https://www.byte.fm/media/artists/ACDC.JPG width=500/>"
   question: "## I'm on a hiiiiighway to..."
   answer: "hell"
-  next_page_password: "three"
 
 
 page3:
@@ -78,7 +75,6 @@ page3:
     ***Come and rock me...***
     "
   answer: "Amadeus"
-  next_page_password: "four"
 
 
 page4:
@@ -89,7 +85,6 @@ page4:
   image: "<img src=https://cdn.moviepilot.de/files/c95a2dfb2a049d425995543450af5d8dc54b1717ab7916a37600c5f8f68b/fill/1200/576/glurak.jpg width=500/>"
   question: "## What is the best element int the world?"
   answer: "Fire"
-  next_page_password: "five"
 
 
 page5:
@@ -100,4 +95,3 @@ page5:
   image: "<img src=https://i.imgur.com/8EOthJt.jpeg width=500/>"
   question: ""
   answer: ""
-  next_page_password: ""
