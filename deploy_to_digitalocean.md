@@ -37,7 +37,7 @@
 
 
 - Script to pull, rebuild and re-deploy:
-  ```shell
+```shell
 #!/bin/bash
 
 echo "Resetting src/ressources/config.yaml"
