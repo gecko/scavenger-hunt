@@ -25,7 +25,7 @@ def read_in_config(page_num: int) -> dict:
         conf["audio"] = ""
     conf["question"] = config[f"page{page_num}"]["question"]
     try:
-        conf["current_page_password"] = config[f"page{page_num - 1}"]["answer"]
+        conf["current_page_password"] = config[f"page{page_num - 1}"]["answer"].lower()
     except:
         conf["current_page_password"] = ""
     return conf
