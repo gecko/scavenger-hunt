@@ -19,6 +19,10 @@ def read_in_config(page_num: int) -> dict:
     conf["title"] = config[f"page{page_num}"]["title"]
     conf["text"] = config[f"page{page_num}"]["text"]
     conf["image"] = config[f"page{page_num}"]["image"]
+    try:
+        conf["audio"] = config[f"page{page_num}"]["audio"]
+    except:
+        conf["audio"] = ""
     conf["question"] = config[f"page{page_num}"]["question"]
     try:
         conf["current_page_password"] = config[f"page{page_num - 1}"]["answer"]
@@ -80,6 +84,10 @@ def show_content(config: dict):
         st.image(Image.open(config["image"]), width=500)
     else:
         st.markdown(config["image"], unsafe_allow_html=True)
+    if conf["audio"] != "":
+        audio_file = open(conf["audio"], ‘rb’)
+        audio_bytes = audio_file.read()
+        st.audio(audio_bytes, format="audio/ogg")
     st.markdown(config["question"], unsafe_allow_html=True)
 
 
