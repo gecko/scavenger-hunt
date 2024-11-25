@@ -15,6 +15,7 @@ def read_in_config(page_num: int) -> dict:
     conf["help_menu"] = config["help_menu"]
     conf["page_title"] = config["page_title"]
     conf["page_icon"] = config["page_icon"]
+    conf["greeting"] = config[f"page{page_num}"]["greeting"]
     conf["title"] = config[f"page{page_num}"]["title"]
     conf["text"] = config[f"page{page_num}"]["text"]
     conf["image"] = config[f"page{page_num}"]["image"]
