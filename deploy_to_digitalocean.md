@@ -34,3 +34,35 @@
   - `sudo ln -s /etc/nginx/sites-available/scavenger-hunt /etc/nginx/sites-enabled/`
   - Run `sudo nginx -t` just to verify the config
   - `sudo systemctl reload nginx`
+
+
+- Script to pull, rebuild and re-deploy:
+  ```shell
+#!/bin/bash
+
+echo "Resetting src/ressources/config.yaml"
+echo "####################################"
+git restore src/ressources/config.yaml
+
+echo "Updating repository"
+echo "###################"
+git pull
+
+echo "Stopping container"
+echo "##################"
+docker stop scavenger
+
+echo "Removing image"
+echo "##############"
+docker rm scavenger
+
+echo "Building new image"
+echo "##################"
+docker build -t scavenger-hunt .
+
+echo "Starting updated container"
+echo "##########################"
+docker run --detach -v ~/scavenger-hunt/src/ressources:/app/src/ressources:rw -p 8501:8501 --user $(id -u):$(id -g) --name scavenger scavenger-hunt
+```
+
+
