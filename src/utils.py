@@ -104,9 +104,20 @@ def show_help_menu(config: dict):
 def greetings():
     """A pop up dialog that greets the users"""
     st.image(Image.open("ressources/cover.png"), width=450)
-    st.markdown("## 🎄 Data Analytics @ Technik 🎅")
     st.markdown(
-        "## 🎁 <span style='color:red'>Weihnachts</span><span style='color:green'>special</span> <span style='color:red'>2024</span> 🍬",
+        "<h1 style='text-align:center;'>Herzlich willkommen zum</h1>",
+        unsafe_allow_html=True,
+    )
+    st.markdown(
+        "<h3 style='text-align:center;'>🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄</h3>",
+        unsafe_allow_html=True,
+    )
+    st.markdown(
+        "<h3 style='text-align:center;'>🎄 Data Analytics @ Technik <span style='color:red'>Weihnachts</span><span style='color:green'>special</span> <span style='color:red'>2024</span> 🎄</h3>",
+        unsafe_allow_html=True,
+    )
+    st.markdown(
+        "<h3 style='text-align:center;'>🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄</h3>",
         unsafe_allow_html=True,
     )
 
