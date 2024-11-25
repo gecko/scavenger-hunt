@@ -1,5 +1,5 @@
 # Run with
-# streamlit run Welcome.py --theme.base="dark" --theme.primaryColor="#ea0a8e"
+# streamlit run app.py --theme.base="dark" --theme.primaryColor="#ea0a8e"
 
 from utils import get_named_page_renderer, render_admin_page
 import yaml

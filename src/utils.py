@@ -60,6 +60,9 @@ def setup_session_states(page_num: int, is_start: bool):
     if f"page{page_num}_solved" not in st.session_state:
         st.session_state[f"page{page_num}_solved"] = False
 
+    if "is_greeted" not in st.session_state:
+        st.session_state["is_greeted"] = False
+
     return (
         st.session_state[f"page{page_num}_access"],
         st.session_state[f"page{page_num}_solved"],
@@ -97,6 +100,13 @@ def show_help_menu(config: dict):
     st.markdown(config["help_menu"], unsafe_allow_html=True)
 
 
+@st.dialog("Hallo liebe DA Gilde")
+def greetings():
+    """A pop up dialog that greets the users"""
+    st.image(Image.open("ressources/sliding_puzzle.jpg"), width=450)
+    st.markdown("## Hello!")
+
+
 def get_named_page_renderer(name, page_num, is_start, is_end):
     """
     Configures the main page rendering function and renames it.
@@ -128,6 +138,11 @@ def get_named_page_renderer(name, page_num, is_start, is_end):
 
         if has_access:
             show_content(config)
+
+        if is_start:  # Display a greeting dialog
+            if not st.session_state["is_greeted"]:
+                greetings()
+                st.session_state["is_greeted"] = True
 
         if is_end:  # The last page doesn't have a quizz and a solution
             if has_access:
