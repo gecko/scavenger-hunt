@@ -104,8 +104,11 @@ def show_help_menu(config: dict):
 def greetings():
     """A pop up dialog that greets the users"""
     st.image(Image.open("ressources/cover.png"), width=450)
-    st.markdown("## Data Analytics @ Technik")
-    st.markdown("## Weihnachtsspecial 2024")
+    st.markdown("## 🎄 Data Analytics @ Technik 🎅")
+    st.markdown(
+        "## 🎁 <span style='color:red'>Weihnachts</span><span style='color:green'>special</span> <span style='color:red'>2024</span> 🍬",
+        unsafe_allow_html=True,
+    )
 
 
 def get_named_page_renderer(name, page_num, is_start, is_end):
