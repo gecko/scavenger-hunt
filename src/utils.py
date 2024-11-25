@@ -100,11 +100,12 @@ def show_help_menu(config: dict):
     st.markdown(config["help_menu"], unsafe_allow_html=True)
 
 
-@st.dialog("Hallo liebe DA Gilde")
+@st.dialog("Herzlich willkommen")
 def greetings():
     """A pop up dialog that greets the users"""
-    st.image(Image.open("ressources/sliding_puzzle.jpg"), width=450)
-    st.markdown("## Hello!")
+    st.image(Image.open("ressources/cover.png"), width=450)
+    st.markdown("## Data Analytics @ Technik")
+    st.markdown("## Weihnachtsspecial 2024")
 
 
 def get_named_page_renderer(name, page_num, is_start, is_end):
