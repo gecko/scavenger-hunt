@@ -114,6 +114,7 @@ def get_named_page_renderer(name, page_num, is_start, is_end):
         has_access, is_solved = setup_session_states(page_num, is_start)
 
         if not has_access:
+            st.markdown(config["greeting"], unsafe_allow_html=True)
             has_access = check_access_right(config, page_num)
 
         if has_access:
