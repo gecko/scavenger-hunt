@@ -20,6 +20,7 @@ page0:
   title: "Haddaway's quest"
   text: "Buckle up for some Eurodance!"
   image: "<img src=https://www.musicbusinessworldwide.com/files/2024/03/Haddaway-%E2%80%93-%E2%80%98What-Is-Love-cover-1992-%C2%A9-BMG-e1709803645198.jpg width=500/>"
+  audio: "ressources/Morsecode.mp3"
   question: "# What is love?
     
     **Baby don't hurt...**
@@ -35,6 +36,7 @@ page1:
   title: "Bob Dylan's quest"
   text: "The master singer songwriter has the following question for you"
   image: "<img src=https://wallpapers.com/images/featured-full/bob-dylan-9xn7068n0xu77d6l.jpg width=400/>"
+  audio: ""
   question: "
     ---
 
@@ -50,6 +52,7 @@ page2:
   title: "AC↯DC's quest"
   text: "The band the has redefined rock has the following question for you"
   image: "<img src=https://www.byte.fm/media/artists/ACDC.JPG width=500/>"
+  audio: ""
   question: "## I'm on a hiiiiighway to..."
   answer: "hell"
 
@@ -61,6 +64,7 @@ page3:
   title: "Falco's quest"
   text: "He, who needs no introduction has the following question for you"
   image: "<img src=https://www.sueddeutsche.de/2022/06/21/f63b76eb-bdf4-43d3-bbda-2543f2b799af.jpeg height=400/>"
+  audio: ""
   question: "
     Er war Superstar
     <br>
@@ -88,6 +92,7 @@ page4:
   title: "Charizard's quest"
   text: "He who has the strongest will of them all wants to know the following from you"
   image: "<img src=https://cdn.moviepilot.de/files/c95a2dfb2a049d425995543450af5d8dc54b1717ab7916a37600c5f8f68b/fill/1200/576/glurak.jpg width=500/>"
+  audio: ""
   question: "## What is the best element int the world?"
   answer: "Fire"
 
@@ -99,5 +104,6 @@ page5:
   title: "You did it!"
   text: "### You crazy son of a bitch!"
   image: "<img src=https://i.imgur.com/8EOthJt.jpeg width=500/>"
+  audio: ""
   question: ""
   answer: ""
