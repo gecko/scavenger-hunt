@@ -68,7 +68,7 @@ def setup_session_states(page_num: int, is_start: bool):
 
 def check_access_right(config: dict, page_num: int) -> bool:
     """Ask for a password and return if it is correct"""
-    password = st.text_input("Enter password", type="password")
+    password = st.text_input("Enter password", type="password").lower()
     if password == config["current_page_password"]:
         st.session_state[f"page{page_num}_access"] = True
         return True
@@ -84,8 +84,8 @@ def show_content(config: dict):
         st.image(Image.open(config["image"]), width=500)
     else:
         st.markdown(config["image"], unsafe_allow_html=True)
-    if conf["audio"] != "":
-        audio_file = open(conf["audio"], "rb")
+    if config["audio"] != "":
+        audio_file = open(config["audio"], "rb")
         audio_bytes = audio_file.read()
         st.audio(audio_bytes, format="audio/ogg")
     st.markdown(config["question"], unsafe_allow_html=True)
