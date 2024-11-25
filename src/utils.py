@@ -85,7 +85,7 @@ def show_content(config: dict):
     else:
         st.markdown(config["image"], unsafe_allow_html=True)
     if conf["audio"] != "":
-        audio_file = open(conf["audio"], ‘rb’)
+        audio_file = open(conf["audio"], "rb")
         audio_bytes = audio_file.read()
         st.audio(audio_bytes, format="audio/ogg")
     st.markdown(config["question"], unsafe_allow_html=True)
