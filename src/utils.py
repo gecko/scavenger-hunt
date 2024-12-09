@@ -8,27 +8,41 @@ import os
 
 def read_in_config(page_num: int) -> dict:
     """Load all details for the pages from yaml file and return them as dict"""
-    with open("ressources/config.yaml", "r", encoding="utf-8") as file:
-        config = yaml.load(file, Loader=yaml.FullLoader)
-
-    conf = {}
-    conf["help_menu"] = config["help_menu"]
-    conf["page_title"] = config["page_title"]
-    conf["page_icon"] = config["page_icon"]
-    conf["greeting"] = config[f"page{page_num}"]["greeting"]
-    conf["title"] = config[f"page{page_num}"]["title"]
-    conf["text"] = config[f"page{page_num}"]["text"]
-    conf["image"] = config[f"page{page_num}"]["image"]
     try:
-        conf["audio"] = config[f"page{page_num}"]["audio"]
+        with open("ressources/config.yaml", "r", encoding="utf-8") as file:
+            config = yaml.load(file, Loader=yaml.FullLoader)
+    
+        conf = {}
+        conf["help_menu"] = config["help_menu"]
+        conf["page_title"] = config["page_title"]
+        conf["page_icon"] = config["page_icon"]
+        conf["greeting"] = config[f"page{page_num}"]["greeting"]
+        conf["title"] = config[f"page{page_num}"]["title"]
+        conf["text"] = config[f"page{page_num}"]["text"]
+        conf["image"] = config[f"page{page_num}"]["image"]
+        try:
+            conf["audio"] = config[f"page{page_num}"]["audio"]
+        except:
+            conf["audio"] = ""
+        conf["question"] = config[f"page{page_num}"]["question"]
+        try:
+            conf["current_page_password"] = config[f"page{page_num - 1}"]["answer"].lower()
+        except:
+            conf["current_page_password"] = ""
+        return conf
     except:
+        conf = {}
+        conf["help_menu"] = ""
+        conf["page_title"] = "Error reading config"
+        conf["page_icon"] = "⚠"
+        conf["greeting"] = "Error reading config"
+        conf["title"] = "Error reading config"
+        conf["text"] = "Error reading config"
+        conf["image"] = ""
         conf["audio"] = ""
-    conf["question"] = config[f"page{page_num}"]["question"]
-    try:
-        conf["current_page_password"] = config[f"page{page_num - 1}"]["answer"].lower()
-    except:
+        conf["question"] = ""
         conf["current_page_password"] = ""
-    return conf
+        return conf
 
 
 def setup_page(config: dict):
