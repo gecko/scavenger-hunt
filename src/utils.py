@@ -84,9 +84,10 @@ def show_content(config: dict):
     st.title(config["title"])
     st.markdown(config["text"], unsafe_allow_html=True)
     if os.path.exists(config["image"]):
-        st.image(Image.open(config["image"]), width=500)
+        _, col, _ = st.columns([1,7,1])
+        col.image(Image.open(config["image"]), use_container_width=True)
     else:
-        st.markdown(config["image"], unsafe_allow_html=True)
+        st.markdown("<center>" + config["image"] + "</center>", unsafe_allow_html=True)
     if config["audio"] != "":
         audio_file = open(config["audio"], "rb")
         audio_bytes = audio_file.read()
