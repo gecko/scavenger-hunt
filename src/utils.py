@@ -45,6 +45,14 @@ def read_in_config(page_num: int) -> dict:
         return conf
 
 
+
+def error_page():
+    """A page that is rendered, if the config is not parsable"""
+    st.markdown("## Error while parsing `ressources/config.yaml`.")
+    st.write("You probably have messed up quotes inside of quotes ;)")
+
+
+
 def setup_page(config: dict):
     """Page styling"""
     st.set_page_config(
